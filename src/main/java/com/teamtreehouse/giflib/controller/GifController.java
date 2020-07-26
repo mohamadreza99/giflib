@@ -10,15 +10,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 public class GifController {
     @Autowired
     private GifRepository gifRepository;
 
-    //responseBody indicate the returned string from the method used as response without any other processing
+//    //responseBody indicate the returned string from the method used as response without any other processing
+//    @RequestMapping("/")
+//    public String listGifs() {
+//        return "home";
+//    }
+
     @RequestMapping("/")
-    public String listGifs() {
+    public String listGifs(ModelMap modelMap) {
+        List<Gif> allGifs = gifRepository.getAllGifs();
+        modelMap.put("gifs", allGifs);
         return "home";
     }
 
